@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
   constructor(private database: DatabaseService, private breakpointObserer: BreakpointObserver) { }
 
   ngOnInit(): void {
-    this.database.getData().subscribe(data => {
+    this.database.getData('s1').subscribe(data => {
       this.lineChartData[0].data = data.map((record: any[]) => record[1]);
       this.lineChartLabels = data.map((record: any[]) => {
         const timeStamp: number = Date.parse(record[0]);
