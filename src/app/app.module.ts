@@ -3,20 +3,26 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { LayoutModule } from '@angular/cdk/layout';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { ChartsModule } from 'ng2-charts';
+import { MatFormFieldModule, MatSelectModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
+import { SelectComponent } from './component/select/select.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SelectComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    ChartsModule,
     LayoutModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+
+    MatFormFieldModule,
+    MatSelectModule,
+    BrowserAnimationsModule
   ],
   providers: [
 
