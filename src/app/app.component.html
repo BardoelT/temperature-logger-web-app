@@ -1,6 +1,6 @@
 <app-select (selectionChanged)="updateQuery($event)"></app-select>
 
-<google-chart 
+<google-chart *ngIf="myData.length !== 0"
   type=LineChart
   [data]="myData"
   [dynamicResize]=true
