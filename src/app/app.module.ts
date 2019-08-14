@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { SelectComponent } from './component/select/select.component';
+import { GoogleChartsModule } from 'angular-google-charts';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { SelectComponent } from './component/select/select.component';
     HttpClientModule,
     LayoutModule,
     FlexLayoutModule,
+    GoogleChartsModule.forRoot(),
 
     MatFormFieldModule,
     MatSelectModule,

@@ -1,3 +1,9 @@
 <app-select (selectionChanged)="updateQuery($event)"></app-select>
 
-
+<google-chart 
+  type=LineChart
+  [data]="myData"
+  [dynamicResize]=true
+  style="width: 100%;"
+  [columnNames]="columnNames">
+</google-chart>

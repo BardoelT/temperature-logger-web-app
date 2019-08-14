@@ -15,7 +15,17 @@ export class AppComponent implements OnInit {
 
   constructor(private database: DatabaseService, private breakpointObserer: BreakpointObserver) { }
 
+  myData = [];
+  columnNames = ["", "s1", "s2"]
+
   ngOnInit(): void {
+    this.database.getDataOnDay('2019/07/18', ['s1','s2']).subscribe(data => {
+      console.log(data);
+      this.myData = data;
+
+    });
+    
+
     // this.database.getDataOnDay('2019/07/18', ['s1','s2']).subscribe(data => {
     //   this.lineChartData[0].data = data.map((record: any[]) => record[1]);
     //   this.lineChartData[1].data = data.map((record: any[]) => record[2]);
@@ -29,5 +39,4 @@ export class AppComponent implements OnInit {
   updateQuery(opt: string) {
     console.log(opt);
   }
-
 }
