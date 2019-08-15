@@ -17,10 +17,11 @@ export class AppComponent implements OnInit {
 
   myData = [];
   columnNames = ["", 'load1', 'load5', 'load15'];
+  myType = "LineChart"
   myOptions = {
     hAxis: {
       format: 'HH:mm'
-}
+    }
   }
 
   formatData(data: any): void {
@@ -32,29 +33,26 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
+
     this.database.queryDb = 'FROM \"telegraf\".\"autogen\".\"system\" ';
-    this.database.addDataFields(['load1', 'load5', 'load15']);
+    this.database.setDataFields(['load1', 'load5', 'load15']);
     this.database.getDataLastHour().subscribe(data => this.formatData(data));
-
-
-    // this.database.getDataOnDay('2019/07/18', ['s1','s2']).subscribe(data => {
-    //   this.lineChartData[0].data = data.map((record: any[]) => record[1]);
-    //   this.lineChartData[1].data = data.map((record: any[]) => record[2]);
-    //   this.lineChartLabels = data.map((record: any[]) => {
-    //     const timeStamp: number = Date.parse(record[0]);
-    //     return new Date(timeStamp).toLocaleTimeString('nl-NL');
-    //   })
-    //   console.log(data);
-    // });
   }
+  
   updateQuery(opt: string): void {
     console.log(opt);
-    if(opt === "Hour")
+    if (opt === "Current") {
+      this.myType = "Table";
+      this.database.getDataCurrent().subscribe(data => this.formatData(data));
+      return;
+    }
+
+    this.myType = "LineChart";
+    if (opt === "Hour")
       this.database.getDataLastHour().subscribe(data => this.formatData(data));
-    else if(opt === "Day")
+    else if (opt === "Day")
       this.database.getDataLastDay().subscribe(data => this.formatData(data));
-    else if(opt === "Week")
+    else if (opt === "Week")
       this.database.getDataLastWeek().subscribe(data => this.formatData(data));
   }
 }

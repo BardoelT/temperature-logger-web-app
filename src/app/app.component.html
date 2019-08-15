@@ -1,7 +1,7 @@
 <app-select (selectionChanged)="updateQuery($event)"></app-select>
 
 <google-chart *ngIf="myData.length !== 0"
-  type=LineChart
+  [type]="myType"
   [data]="myData"
   [dynamicResize]=true
   style="width: 100%;"
