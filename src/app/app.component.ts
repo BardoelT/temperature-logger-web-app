@@ -16,22 +16,26 @@ export class AppComponent implements OnInit {
   constructor(private database: DatabaseService, private breakpointObserer: BreakpointObserver) { }
 
   myData = [];
-  columnNames = ["", "s1", "s2"];
-
+  columnNames = ["", 'load1', 'load5', 'load15'];
   myOptions = {
     hAxis: {
       format: 'HH:mm'
 }
   }
 
-  ngOnInit(): void {
-    this.database.getDataOnDay('2019/07/18', ['s1', 's2']).subscribe(data => {
-      console.log(data);
-      this.myData = data.map((record: any[]) => {
-        record[0] = new Date(Date.parse(record[0]));
-        return record;
-      })
+  formatData(data: any): void {
+    console.log(data);
+    this.myData = data.map((record: any[]) => {
+      record[0] = new Date(Date.parse(record[0]));
+      return record;
     });
+  }
+
+  ngOnInit(): void {
+    
+    this.database.queryDb = 'FROM \"telegraf\".\"autogen\".\"system\" ';
+    this.database.addDataFields(['load1', 'load5', 'load15']);
+    this.database.getDataLastHour().subscribe(data => this.formatData(data));
 
 
     // this.database.getDataOnDay('2019/07/18', ['s1','s2']).subscribe(data => {
@@ -44,7 +48,13 @@ export class AppComponent implements OnInit {
     //   console.log(data);
     // });
   }
-  updateQuery(opt: string) {
+  updateQuery(opt: string): void {
     console.log(opt);
+    if(opt === "Hour")
+      this.database.getDataLastHour().subscribe(data => this.formatData(data));
+    else if(opt === "Day")
+      this.database.getDataLastDay().subscribe(data => this.formatData(data));
+    else if(opt === "Week")
+      this.database.getDataLastWeek().subscribe(data => this.formatData(data));
   }
 }

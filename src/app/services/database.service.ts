@@ -32,7 +32,7 @@ export class DatabaseService {
   public getDataLastHour(dataset?: string[]): Observable<any[]> {
     if(dataset != null)   // yes falsy....
       this.addDataFields(dataset);
-    return this.executeQuery(`${this.getSubQuery()}WHERE time > now() - 1h`);
+    return this.executeQuery(`${this.getSubQuery()}WHERE time > now() - 1h ${this.getFilterString(10, 360)}`);
   }
 
   getDataLastDay(dataset?: string[]): Observable<any[]> {
