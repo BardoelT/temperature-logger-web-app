@@ -64,22 +64,20 @@ export class DatabaseService {
     console.log(query);
     return this.http.get(query)
       .pipe(
-      map((response: any) => response.results[0].series[0].values)
+      map((response: any) => response.results[0].series[0])
     );
   }
 
-  getStringMeanOfFields(): string{
-    var ret: string[] = [];
-    this.queryFields.forEach(element => {
-      ret.push(`mean(\"${element}\") `);
+  getStringMeanOfFields(): string {
+    var ret = this.queryFields.map(element => {
+      return `mean(\"${element}\") as \"${element}\"  `;
     });
     return `${ret}`;
   }
   
-  getStringLastOfFields(): string{
-    var ret: string[] = [];
-    this.queryFields.forEach(element => {
-      ret.push(`last(\"${element}\") `);
+  getStringLastOfFields(): string {
+    var ret = this.queryFields.map(element => {
+      return `last(\"${element}\") as \"${element}\" `;
     });
     return `${ret}`;
   }
