@@ -25,7 +25,6 @@ export class AppComponent implements OnInit {
   }
 
   formatData(data: any): void {
-    console.log(data.values);
     this.columnNames = data.columns;
     this.myData = data.values.map((record: any[]) => {
       record[0] = new Date(Date.parse(record[0]));
@@ -48,7 +47,6 @@ export class AppComponent implements OnInit {
   }
   
   updateQuery(opt: string): void {
-    console.log(opt);
     this.myData = [];
 
     if (opt === "Current") {
