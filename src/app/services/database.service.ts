@@ -11,7 +11,7 @@ export class DatabaseService {
   constructor(private http: HttpClient) { }
 
   queryUrl: string = 'http://logger:8086/query?pretty=true&q=SELECT ';
-  queryDb: string = 'FROM \"db\".\"autogen\".\"test\" ';
+  queryDb: string = 'FROM \"db\".\"autogen\".\"temperature\" ';
   queryFilter: string = 'GROUP BY time(100s) fill(none) limit 100';
   queryFields: string[] = [];
 
@@ -26,7 +26,7 @@ export class DatabaseService {
   getDataCurrent(dataset?: string[]): Observable<any[]> {
     if(dataset != null)   // yes falsy....
       this.setDataFields(dataset);
-    return this.executeQuery(`${this.queryUrl}${this.getStringLastOfFields()}${this.queryDb} WHERE time > now() - 10s`);
+    return this.executeQuery(`${this.queryUrl}${this.getStringLastOfFields()}${this.queryDb} WHERE time > now() - 30s`);
   }
 
   public getDataLastHour(dataset?: string[]): Observable<any[]> {

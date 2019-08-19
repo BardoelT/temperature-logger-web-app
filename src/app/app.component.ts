@@ -24,6 +24,13 @@ export class AppComponent implements OnInit {
     }
   }
 
+  ngOnInit(): void {
+
+    this.database.queryDb = 'FROM \"telegraf\".\"autogen\".\"system\" ';
+    this.database.setDataFields(['load1', 'load5']);
+    this.database.getDataLastHour().subscribe(data => this.formatData(data));
+  }
+
   formatData(data: any): void {
     this.columnNames = data.columns;
     this.myData = data.values.map((record: any[]) => {
@@ -32,18 +39,11 @@ export class AppComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-
-    this.database.queryDb = 'FROM \"telegraf\".\"autogen\".\"system\" ';
-    this.database.setDataFields(['load1', 'load5', 'load15']);
-    this.database.getDataLastHour().subscribe(data => this.formatData(data));
-  }
-
   func(data: any): void {
     this.myData = data.values[0].map(record => {
         return [`${data.columns.shift()}`, record];
     });
-    this.myData.shift();
+    this.myData[0][1] = new Date(Date.parse(this.myData[0][1])).toLocaleTimeString();
   }
   
   updateQuery(opt: string): void {
