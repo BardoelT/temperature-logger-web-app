@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { DatabaseService } from './services/database.service';
-import { Observable } from 'rxjs';
+import { Observable, interval } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { interval } from 'rxjs';
+import { HttpParams } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-root',
@@ -14,7 +16,7 @@ export class AppComponent implements OnInit {
 
   isHandset$: Observable<any> = this.breakpointObserer.observe(Breakpoints.HandsetLandscape);
 
-  constructor(private database: DatabaseService, private breakpointObserer: BreakpointObserver) { }
+  constructor(private database: DatabaseService, private breakpointObserer: BreakpointObserver, private route: ActivatedRoute) {  }
 
   intervalSelection: string = "Hour";
   refreshInterval = interval(10000);
@@ -28,10 +30,25 @@ export class AppComponent implements OnInit {
     }
   }
 
+  getParamValueQueryString( paramName ) {
+    const url = window.location.href;
+    var paramValue: string = "";
+    if (url.includes('?')) {
+      const httpParams = new HttpParams({ fromString: url.split('?')[1] });
+      paramValue = httpParams.get(paramName);
+    }
+    return paramValue;
+  }
+
   ngOnInit(): void {
+    var fields: string[] = ["load1", "load5", "load15"];
+    var parameterFields: string = this.getParamValueQueryString('fields');
+    if(parameterFields.length > 0)
+      fields = parameterFields.split(',');
+    console.log(fields);
 
     this.database.queryDb = 'FROM \"telegraf\".\"autogen\".\"system\" ';
-    this.database.setDataFields(['load1', 'load5']);
+    this.database.setDataFields(fields);
     this.refreshInterval.subscribe(() => this.update());
     this.update();
   }

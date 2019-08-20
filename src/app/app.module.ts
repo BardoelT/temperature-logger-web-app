@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { SelectComponent } from './component/select/select.component';
 import { GoogleChartsModule } from 'angular-google-charts';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,12 @@ import { GoogleChartsModule } from 'angular-google-charts';
 
     MatFormFieldModule,
     MatSelectModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    RouterModule.forRoot([{
+      path: '',
+      component: AppComponent
+    },
+    ]),
   ],
   providers: [
 
