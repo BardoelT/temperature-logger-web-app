@@ -49,11 +49,11 @@ export class AppComponent implements OnInit {
 
     this.database.queryDb = 'FROM \"telegraf\".\"autogen\".\"system\" ';
     this.database.setDataFields(fields);
-    this.refreshInterval.subscribe(() => this.update());
-    this.update();
+    this.refreshInterval.subscribe(() => this.updateChart());
+    this.updateChart();
   }
 
-  formatData(data: any): void {
+  formatLineChartData(data: any): void {
     this.myData = [];
     this.columnNames = data.columns;
     this.myData = data.values.map((record: any[]) => {
@@ -62,7 +62,7 @@ export class AppComponent implements OnInit {
     });
   }
 
-  func(data: any): void {
+  formatTableData(data: any): void {
     this.myData = [];
     this.myData = data.values[0].map(record => {
         return [`${data.columns.shift()}`, record];
@@ -73,24 +73,24 @@ export class AppComponent implements OnInit {
   updateQuery(intervalSelect: string): void {
     this.intervalSelection = intervalSelect;
     this.myData = [];
-    this.update();
+    this.updateChart();
   }
     
-  update(): void {
+  updateChart(): void {
     if (this.intervalSelection === "Current") {
       this.myType = "Table";
       this.columnNames = [ "Sensor", "Temperature" ];
       this.myData = [];
-      this.database.getDataCurrent().subscribe(data => this.func(data));
+      this.database.getDataCurrent().subscribe(data => this.formatTableData(data));
       return;
     }
 
     this.myType = "LineChart";
     if (this.intervalSelection === "Hour")
-      this.database.getDataLastHour().subscribe(data => this.formatData(data));
+      this.database.getDataLastHour().subscribe(data => this.formatLineChartData(data));
     else if (this.intervalSelection === "Day")
-      this.database.getDataLastDay().subscribe(data => this.formatData(data));
+      this.database.getDataLastDay().subscribe(data => this.formatLineChartData(data));
     else if (this.intervalSelection === "Week")
-      this.database.getDataLastWeek().subscribe(data => this.formatData(data));
+      this.database.getDataLastWeek().subscribe(data => this.formatLineChartData(data));
   }
 }
