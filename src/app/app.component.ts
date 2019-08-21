@@ -80,7 +80,6 @@ export class AppComponent implements OnInit {
     if (this.intervalSelection === "Current") {
       this.myType = "Table";
       this.columnNames = [ "Sensor", "Temperature" ];
-      this.myData = [];
       this.database.getDataCurrent().subscribe(data => this.formatTableData(data));
       return;
     }

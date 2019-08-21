@@ -10,11 +10,13 @@ import { AppComponent } from './app.component';
 import { SelectComponent } from './component/select/select.component';
 import { GoogleChartsModule } from 'angular-google-charts';
 import { RouterModule } from '@angular/router';
+import { LoadiconComponent } from './component/loadicon/load-icon.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SelectComponent
+    SelectComponent,
+    LoadiconComponent
   ],
   imports: [
     BrowserModule,

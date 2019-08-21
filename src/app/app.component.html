@@ -1,5 +1,9 @@
 <app-select (selectionChanged)="updateQuery($event)"></app-select>
 
+<div *ngIf="myData.length === 0" fxLayout="column" fxLayoutAlign="center center">
+  <load-icon fxFlex style="margin: 30px"></load-icon>
+</div>
+
 <google-chart *ngIf="myData.length > 0"
   [type]="myType"
   [data]="myData"
