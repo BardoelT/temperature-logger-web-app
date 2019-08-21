@@ -10,7 +10,7 @@ export class DatabaseService {
 
   constructor(private http: HttpClient) { }
 
-  queryUrl: string = 'http://logger:8086/query?pretty=true&q=SELECT ';
+  queryUrl: string = 'http://logger.local:8086/query?pretty=true&q=SELECT ';
   queryDb: string = 'FROM \"db\".\"autogen\".\"temperature\" ';
   queryFilter: string = 'GROUP BY time(100s) fill(none) limit 100';
   queryFields: string[] = [];
