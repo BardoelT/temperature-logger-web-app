@@ -47,7 +47,6 @@ export class AppComponent implements OnInit {
       fields = parameterFields.split(',');
     console.log(fields);
 
-    // this.database.queryDb = 'FROM \"telegraf\".\"autogen\".\"system\" ';
     this.database.setDataFields(fields);
     this.refreshInterval.subscribe(() => this.updateChart());
     this.updateChart();
