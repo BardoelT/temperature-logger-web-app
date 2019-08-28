@@ -1,6 +1,6 @@
-# TemperatureLogger
 > **_NOTE:_**  This Angular application is part of the Temperature Logger system, this readme is specifically for the whole system. The Agular part is found at the [bottom](#Anglar-web-app).
 
+# TemperatureLogger
 Temperature logger of multiple temperature sensors attached to a central heating system. The sampling of the temperature sensors is done via NodeRed. NodeRed sends every sample as a JSON package to the database wich is a part of TICK-stack.
 
 ## Raspbian (buster)
