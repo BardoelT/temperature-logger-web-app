@@ -45,7 +45,6 @@ export class AppComponent implements OnInit {
     var parameterFields: string = this.getParamValueQueryString('fields');
     if(parameterFields.length > 0)
       fields = parameterFields.split(',');
-    console.log(fields);
 
     this.database.setDataFields(fields);
     this.refreshInterval.subscribe(() => this.updateChart());
