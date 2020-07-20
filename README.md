@@ -20,7 +20,7 @@ Installing samba enables the usage of hostname instead of ip-address
 
 ## Node-Red
 Set up [node-red](https://nodered.org/docs/getting-started/raspberrypi) for Raspberry Pi for sampling the sensors.
-1. `bash <(curl -sL https://raw.githubusercontent.com/node-red/raspbian-deb-package/master/resources/update-nodejs-and-nodered)`
+1. `sudo apt-get -y install nodered`
 1. Starting node-red
    * `node-red-start` for starting node-red
    * `node-red-stop` for stopping node-red
@@ -28,7 +28,7 @@ Set up [node-red](https://nodered.org/docs/getting-started/raspberrypi) for Rasp
 
 ## Git
 Setting up [Git](https://projects.raspberrypi.org/en/projects/getting-started-with-git/4) for the [node-red project](https://nodered.org/docs/user-guide/projects/) is done as shown below.
-  * `sudo apt install git`
+  * `sudo apt-get -y install git`
   * Change `editorTheme: projects: enabled:` to `true` in `home/pi/.node-red/settings.js`.
   * Reboot the system
 
