@@ -39,14 +39,36 @@ Install [TICK-stack](https://iotbyhvm.ooo/tick-satck-on-raspberry-pi/) with the 
 * `sudo apt-get update`
 * `sudo apt-get install telegraf influxdb chronograf kapacitor`
 
-## Adding nodes
-Add [DS18B20](https://flows.nodered.org/node/node-red-contrib-sensor-ds18b20) node to the node red project for interfacing with the temperature sensors. 
+## Database redirection to usb
+ * Set automount by adding `UUID=<uid of usb-drive> /media/usb vfat auto,noatime,rw,gid=influxdb,uid=influxdb 0 0` into the file `/etc/fstab`
+ * In the file `/etc/telegraf/telegraf.conf` change the [input.disk].mount_points to the location for example `/media/usb`
+ * Change the following in the file `/etc/influxdb/influxdb.conf`
+```
+# under [meta]
+dir = "/new/path/to/influxdb/meta"
 
-And add the [influxdb](https://flows.nodered.org/node/node-red-contrib-influxdb) node for interfacing with the database.
+# under [data]
+dir = "/new/path/to/influxdb/data"
+wal-dir = "/new/path/to/influxdb/wal"
+```
+
+## Adding nodes
+The following nodes are required for running the [node-red](https://github.com/BardoelT/temperature-logger-node-red) project for reading the temperature sensors and sending the data to the database.
+ * [DS18B20](https://flows.nodered.org/node/node-red-contrib-sensor-ds18b20) node for interfacing with the temperature sensors
+ * [influxdb](https://flows.nodered.org/node/node-red-contrib-influxdb) node for interfacing with the database
 
 # Anglar web-app
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.1.
 
+## serving
+On the host (Raspberry-Pi) do the following for serving the application.
+ * Install angular
+ * Install `npm install express`
+ * Build the Angular project with `ng build --prod`
+ * Copy the `dist` folder to the `logger-web-app` directory
+ * Copy `[server.js](https://github.com/BardoelT/temperature-logger-web-app/release/server.js)` to the host to the following path `~/logger-web-app`.
+ * Copy `[temperature-logger-web-app-service.service](https://github.com/BardoelT/temperature-logger-web-app/release/temperature-logger-web-app-service.service)` to the host `etc/systemd/system/`
+ * Enable the service with `sudo systemctl enable temperature-logger-web-app-service.service`
 
 # Ports
 The following interfaces can be found on the corresponding ports.
