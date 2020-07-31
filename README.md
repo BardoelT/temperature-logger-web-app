@@ -66,8 +66,8 @@ On the host (Raspberry-Pi) do the following for serving the application.
  * Install `npm install express`
  * Build the Angular project with `ng build --prod`
  * Copy the `dist` folder to the `logger-web-app` directory
- * Copy `[server.js](https://github.com/BardoelT/temperature-logger-web-app/blob/master/release/server.js)` to the host to the following path `~/logger-web-app`.
- * Copy `[temperature-logger-web-app-service.service](https://github.com/BardoelT/temperature-logger-web-app/blob/master/release/temperature-logger-web-app-service.service)` to the host `etc/systemd/system/`
+ * Copy [`server.js`](https://github.com/BardoelT/temperature-logger-web-app/blob/master/release/server.js) to the host to the following path `~/logger-web-app`.
+ * Copy [`temperature-logger-web-app-service.service`](https://github.com/BardoelT/temperature-logger-web-app/blob/master/release/temperature-logger-web-app-service.service) to the host `etc/systemd/system/`
  * Enable the service with `sudo systemctl enable temperature-logger-web-app-service.service`
 
 # Ports
