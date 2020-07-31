@@ -1,0 +1,11 @@
+[Unit]
+Description=temperature-logger-web-app-service
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/node /home/pi/logger-web-app/server.js
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
