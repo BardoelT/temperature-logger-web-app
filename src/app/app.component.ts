@@ -41,7 +41,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    var fields: string[] = ["s1", "s2", "s3", "s4", "s4", "s5", "s6", "s7", "s8", "s9"];
+    var fields: string[] = ["buiten", "1.1", "1.2", "1.3", "1.4", "2.1", "2.2", "2.3", "2.4"];
     var parameterFields: string = this.getParamValueQueryString('fields');
     if(parameterFields.length > 0)
       fields = parameterFields.split(',');
